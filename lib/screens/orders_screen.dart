@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class OrdersPage extends StatefulWidget {
@@ -165,17 +163,20 @@ class _OrdersPageState extends State<OrdersPage> with SingleTickerProviderStateM
                 tabs: _tabs.map((tab) {
                   return Tab(
                     height: 40,
-                    child: Row(
-                      children: [
-                        Text(tab['title']),
-                        if (tab['count'] != null)
-                          Text(
-                            '(${tab['count']})',
-                            style: const TextStyle(
-                              fontSize: 14,
+                    child: Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(tab['title']),
+                          if (tab['count'] != null)
+                            Text(
+                              '(${tab['count']})',
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
                             ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 }).toList(),
@@ -206,6 +207,7 @@ class _OrdersPageState extends State<OrdersPage> with SingleTickerProviderStateM
                       child: Center(
                         child: Column(
                           children: [
+                            SizedBox(height:20,),
                             buildOrderCard(
                               orderId: '${buildOrderCards[0]['orderId']}',
                               orderAmount: '${buildOrderCards[0]['orderAmount']}',
@@ -381,146 +383,157 @@ Widget buildOrderCard({
         ),
       ],
     ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Header with date and arrow
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                date,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header with date and arrow
+          Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+              decoration: BoxDecoration(
+                color:  Colors.grey[200],
+                borderRadius: BorderRadius.circular(20),
               ),
-              const Icon(Icons.chevron_right, color: Colors.grey),
-            ],
-          ),
-        ),
-        
-        // Order ID row
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "ORDER ID",
-                style: TextStyle(color: Colors.grey[400], fontSize: 12),
-              ),
-              Text(
-                orderId,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
-        ),
-        
-        const Divider(height: 1, thickness: 1, color: Color(0xFFEEEEEE)),
-        
-        // Order Amount row
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Order Amount",
-                style: TextStyle(color: Colors.grey[400], fontSize: 12),
-              ),
-              Text(
-                "\$$orderAmount",
-                style: const TextStyle(fontSize: 14),
-              ),
-            ],
-          ),
-        ),
-        
-        // Payment Method row
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Payment Method",
-                style: TextStyle(color: Colors.grey[400], fontSize: 12),
-              ),
-              Text(
-                paymentMethod,
-                style: const TextStyle(fontSize: 14),
-              ),
-            ],
-          ),
-        ),
-        
-        // Location row
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Location",
-                style: TextStyle(color: Colors.grey[400], fontSize: 12),
-              ),
-              Expanded(
-                child: Text(
-                  location,
-                  style: const TextStyle(fontSize: 14),
-                  textAlign: TextAlign.right,
-                ),
-              ),
-            ],
-          ),
-        ),
-        
-        // Buttons row
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              OutlinedButton(
-                onPressed: () {
-                  // Cancel action
-                },
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Color(0xFFFF6B6B)),
-                  foregroundColor: const Color(0xFFFF6B6B),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                   Text(
+                    date,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                ),
-                child: const Text("Cancel"),
-              ),
-              const SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
-                  // Confirm action
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF00D261),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                 const Icon(
+                    Icons.chevron_right,
+                    color: Colors.grey,
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                ],
+              ),
+            ),
+            const SizedBox(height: 10),
+          
+          // Order details row
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "ORDER ID",
+                      style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                    ),
+                    Text(
+                      orderId,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
                 ),
-                child: const Text("Confirm"),
+              ),
+      
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Order Amount",
+                      style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                    ),
+                    Text(
+                      "\$$orderAmount",
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
+              ),
+      
+              // Payment Method row
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Payment Method",
+                      style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                    ),
+                    Text(
+                      paymentMethod,
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
-        )
-      ],
+          
+          const Divider(height: 1, thickness: 1, color: Color(0xFFEEEEEE)),
+          
+          // Location row
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Location",
+                      style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                    ),
+                    Text(
+                      location,
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    OutlinedButton(
+                      onPressed: () {
+                        // Cancel action
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Color(0xFFFF6B6B)),
+                        foregroundColor: const Color(0xFFFF6B6B),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      ),
+                      child: const Text("Cancel"),
+                    ),
+                    const SizedBox(width: 10),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Confirm action
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF00D261),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      ),
+                      child: const Text("Confirm"),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     ),
   );
 }
