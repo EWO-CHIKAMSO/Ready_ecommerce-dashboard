@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ready_ecommerce/screens/dashboard.dart';
+import 'package:ready_ecommerce/screens/orders_screen.dart';
 
 
 class BottomNav extends StatefulWidget {
@@ -14,7 +15,7 @@ class _BottomNavState extends State<BottomNav> {
 
   final List<Widget> _pages = const [
    EcommerceDashboard(),
-    Center(child: Text('Orders')),
+   OrdersPage(),
     Center(child: Text('Wallet')),
     Center(child: Text('Profile')),
   ];
