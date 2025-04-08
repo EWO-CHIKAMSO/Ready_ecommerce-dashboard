@@ -204,20 +204,24 @@ class _OrdersPageState extends State<OrdersPage> with SingleTickerProviderStateM
                       ),
                       // Confirm
                       Expanded(
-                      child: Center(
-                        child: Column(
-                          children: [
-                            SizedBox(height:20,),
-                            buildOrderCard(
-                              orderId: '${buildOrderCards[0]['orderId']}',
-                              orderAmount: '${buildOrderCards[0]['orderAmount']}',
-                              paymentMethod: '${buildOrderCards[0]['paymentMethod']}',
-                              location: '${buildOrderCards[0]['location']}',
-                              date: '${buildOrderCards[0]['date']}',
-                             
-                            ),
-                          ],
-                        )
+
+                      child: Container(
+                        padding: const EdgeInsets.all(15),
+                        child: Center(
+                          child: Column(
+                          
+                            children: [
+                              buildOrderCard(
+                                orderId: '${buildOrderCards[0]['orderId']}',
+                                orderAmount: '${buildOrderCards[0]['orderAmount']}',
+                                paymentMethod: '${buildOrderCards[0]['paymentMethod']}',
+                                location: '${buildOrderCards[0]['location']}',
+                                date: '${buildOrderCards[0]['date']}',
+                               
+                              ),
+                            ],
+                          )
+                        ),
                       ),
                       ),
                       // To Pickup
@@ -371,7 +375,8 @@ Widget buildOrderCard({
   required String date,
 }) {
   return Container(
-    margin: const EdgeInsets.only(bottom: 15),
+    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+    margin: const EdgeInsets.only(bottom: 10),
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(10),
@@ -383,157 +388,152 @@ Widget buildOrderCard({
         ),
       ],
     ),
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header with date and arrow
-          Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-              decoration: BoxDecoration(
-                color:  Colors.grey[200],
-                borderRadius: BorderRadius.circular(20),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Header with date and arrow
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                date,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                ),
               ),
-              child: Row(
+              const Icon(
+                Icons.chevron_right,
+                color: Colors.grey,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        
+        // Order details row
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   Text(
-                    date,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
+                  Text(
+                    "ORDER ID",
+                    style: TextStyle(color: Colors.grey[400], fontSize: 12),
                   ),
-                 const Icon(
-                    Icons.chevron_right,
-                    color: Colors.grey,
+                  Text(
+                    orderId,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 10),
-          
-          // Order details row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Order Amount",
+                    style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                  ),
+                  Text(
+                    "\$$orderAmount",
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
+            ),
+            // Payment Method row
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Payment Method",
+                    style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                  ),
+                  Text(
+                    paymentMethod,
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        
+        const Divider(height: 1, thickness: 1, color: Color(0xFFEEEEEE)),
+        
+        // Location row
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "ORDER ID",
-                      style: TextStyle(color: Colors.grey[400], fontSize: 12),
-                    ),
-                    Text(
-                      orderId,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Location",
+                    style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                  ),
+                  Text(
+                    location,
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  OutlinedButton(
+                    onPressed: () {
+                      // Cancel action
+                    },
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: Color(0xFFFF6B6B)),
+                      foregroundColor: const Color(0xFFFF6B6B),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     ),
-                  ],
-                ),
-              ),
-      
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Order Amount",
-                      style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                    child: const Text("Cancel"),
+                  ),
+                  const SizedBox(width: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Confirm action
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF00D261),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     ),
-                    Text(
-                      "\$$orderAmount",
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ],
-                ),
-              ),
-      
-              // Payment Method row
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Payment Method",
-                      style: TextStyle(color: Colors.grey[400], fontSize: 12),
-                    ),
-                    Text(
-                      paymentMethod,
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ],
-                ),
+                    child: const Text("Confirm"),
+                  ),
+                ],
               ),
             ],
           ),
-          
-          const Divider(height: 1, thickness: 1, color: Color(0xFFEEEEEE)),
-          
-          // Location row
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Location",
-                      style: TextStyle(color: Colors.grey[400], fontSize: 12),
-                    ),
-                    Text(
-                      location,
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    OutlinedButton(
-                      onPressed: () {
-                        // Cancel action
-                      },
-                      style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: Color(0xFFFF6B6B)),
-                        foregroundColor: const Color(0xFFFF6B6B),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      ),
-                      child: const Text("Cancel"),
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Confirm action
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00D261),
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      ),
-                      child: const Text("Confirm"),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }
