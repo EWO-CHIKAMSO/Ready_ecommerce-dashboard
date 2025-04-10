@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ready_ecommerce/screens/dashboard.dart';
 import 'package:ready_ecommerce/screens/orders_screen.dart';
+import 'package:ready_ecommerce/screens/profile.dart';
 import 'package:ready_ecommerce/screens/wallet.dart';
 
 
@@ -18,7 +19,7 @@ class _BottomNavState extends State<BottomNav> {
    EcommerceDashboard(),
    OrdersPage(),
    Wallet(),
-    Center(child: Text('Profile')),
+    ProfilePage()
   ];
 
   void _onTabTapped(int index) {
