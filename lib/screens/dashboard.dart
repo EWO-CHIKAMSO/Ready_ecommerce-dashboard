@@ -38,7 +38,7 @@ class EcommerceDashboard extends StatelessWidget {
             ),
            GestureDetector(
             onTap:onGoToSecondPage ,
-            child: Image.asset('assets/images/exit_switch.jpg', height: 30, width: 30)),
+            child:  Icon(Icons.exit_to_app, color: Colors.black, size: 30))
            
           ],
         ),

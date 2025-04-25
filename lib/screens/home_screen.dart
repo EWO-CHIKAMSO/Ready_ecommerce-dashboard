@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ready_ecommerce/screens/change_password.dart';
+import 'package:ready_ecommerce/screens/dashboard.dart';
 import 'package:ready_ecommerce/screens/order_history_screen.dart';
 import 'package:ready_ecommerce/screens/privacy_policy.dart';
 import 'package:ready_ecommerce/screens/rider_support.dart';
 import 'package:ready_ecommerce/screens/term_and_conditions.dart';
+import 'package:ready_ecommerce/widgets/buttomnav.dart';
+import 'package:ready_ecommerce/widgets/login.dart';
 
 
 class HomeScreen extends StatefulWidget {
-  final VoidCallback onGoBack;
-  const HomeScreen({super.key,  required this.onGoBack});
+   final VoidCallback onGoBack;
+   const HomeScreen({super.key,   required this.onGoBack,  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -17,6 +20,32 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isDarkMode = false;
+
+void _logout() {
+   var nav = Navigator.pushReplacementNamed(context, BottomNav(
+     onGoToSecondPage: widget.onGoBack,
+   ).toString());
+   print('nav: $nav');
+//  BottomNav(
+//         onGoToSecondPage: () {
+//           // This handles logout
+//           Navigator.pushReplacement(
+//             context,
+//             MaterialPageRoute(builder: (_) =>BottomNav(onGoToSecondPage: widget.onGoBack)),
+//           );
+//         },
+//       );
+}
+
+
+
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,8 +82,13 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
 
                GestureDetector(
-            onTap:widget.onGoBack ,
-            child: Image.asset('assets/images/exit_switch.jpg', height: 30, width: 30)),
+               
+            onTap:_logout ,
+             child:
+             // Image.asset('assets/images/exit_switch.jpg', height: 30, width: 30)
+             Icon(Icons.exit_to_app, color: Colors.black, size: 30),
+            ),
+              
             SizedBox(width: 10,),
               Padding(
                 padding: const EdgeInsets.only(right: 16),
@@ -226,20 +260,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 SizedBox(height: 16),
 
-                ElevatedButton(
-                  onPressed:widget.onGoBack,
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(120, 40),
-                    elevation: 8,
-                  ),
-                  child: Wrap(
-                    children: [
-                      Icon(Icons.refresh),
-                      SizedBox(width: 8),
-                      Text("Refresh"),
-                    ],
-                  ),
-                ),
+                // ElevatedButton(
+                //   onPressed:widget.onGoBack,
+                //   style: ElevatedButton.styleFrom(
+                //     minimumSize: Size(120, 40),
+                //     elevation: 8,
+                //   ),
+                //   child: Wrap(
+                //     children: [
+                //       Icon(Icons.refresh),
+                //       SizedBox(width: 8),
+                //       Text("Refresh"),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),

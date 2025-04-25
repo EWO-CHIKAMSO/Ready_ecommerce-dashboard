@@ -37,6 +37,7 @@ dependencies:
   animated_toggle_switch: ^0.8.4
   font_awesome_flutter: ^10.8.0
   liquid_swipe: ^3.1.0
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:

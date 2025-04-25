@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:liquid_swipe/liquid_swipe.dart';
+
 import 'package:ready_ecommerce/screens/home_screen.dart';
 import 'package:ready_ecommerce/widgets/buttomnav.dart';
+import 'package:ready_ecommerce/widgets/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,7 +55,8 @@ class _SwipeScreenWrapperState extends State<SwipeScreenWrapper> {
   Widget build(BuildContext context) {
     final pages = [
       BottomNav(onGoToSecondPage: goToSecondPage),
-      HomeScreen(onGoBack: goToMainApp),
+      LoginScreen(onGoToSecondPage: goToSecondPage),
+      // HomeScreen(onGoBack: goToMainApp),
     ];
 
     return Scaffold(
