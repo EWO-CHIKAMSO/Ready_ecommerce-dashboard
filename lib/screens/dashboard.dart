@@ -1,53 +1,57 @@
 import 'package:flutter/material.dart';
 
 class EcommerceDashboard extends StatelessWidget {
-  const EcommerceDashboard({Key? key}) : super(key: key);
+  final VoidCallback onGoToSecondPage;
+
+  const EcommerceDashboard({
+    Key? key,
+    required this.onGoToSecondPage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: Colors.pink[600],
-                  borderRadius: BorderRadius.circular(8),
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Colors.pink[600],
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(Icons.shopping_bag, 
+                    color: Colors.white, size: 20),
                 ),
-                child: const Icon(Icons.shopping_bag, color: Colors.white, size: 20),
-              ),
-              const SizedBox(width: 8),
-              const Text(
-                'Ready\neCommerce',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                const SizedBox(width: 8),
+                const Text(
+                  'Ready\neCommerce',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+           GestureDetector(
+            onTap:onGoToSecondPage ,
+            child: Image.asset('assets/images/exit_switch.jpg', height: 30, width: 30)),
+           
+          ],
+        ),
+        actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(Icons.notifications),
             onPressed: () {},
           ),
         ],
       ),
-        
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.notifications),
-              onPressed: () {},
-            ),
-          ],
-        ),
       body: SafeArea(
         child: Column(
           children: [
-        
             _buildOrderOverview(),
             _buildSalesInfo(),
           ],
@@ -55,7 +59,6 @@ class EcommerceDashboard extends StatelessWidget {
       ),
     );
   }
-
  
 
   Widget _buildOrderOverview() {

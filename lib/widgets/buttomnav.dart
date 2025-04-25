@@ -6,7 +6,9 @@ import 'package:ready_ecommerce/screens/wallet.dart';
 
 
 class BottomNav extends StatefulWidget {
-  const BottomNav({Key? key}) : super(key: key);
+  final VoidCallback onGoToSecondPage;
+
+  const BottomNav({Key? key, required this.onGoToSecondPage}) : super(key: key);
 
   @override
   State<BottomNav> createState() => _BottomNavState();
@@ -14,13 +16,18 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
+  late List<Widget> _pages; // 👈 make it late and initialize in initState()
 
-  final List<Widget> _pages = const [
-   EcommerceDashboard(),
-   OrdersPage(),
-   Wallet(),
-    ProfilePage()
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      EcommerceDashboard(onGoToSecondPage: widget.onGoToSecondPage),
+      const OrdersPage(),
+      const Wallet(),
+      const ProfilePage(),
+    ];
+  }
 
   void _onTabTapped(int index) {
     setState(() {
